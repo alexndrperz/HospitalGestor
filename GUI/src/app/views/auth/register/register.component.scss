@@ -1,0 +1,26 @@
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    .cont-control {
+        max-width: 648px;
+        width: 538px;
+        background: #f4f4f4;
+        padding: 35px 116px;
+        border-radius: 9px;
+        border: 1px solid #beb7b7;
+
+        .buttons-cont {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        input {
+            margin:14px 0px;
+            
+        }
+    }
+}

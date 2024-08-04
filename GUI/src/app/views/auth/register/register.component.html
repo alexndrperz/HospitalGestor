@@ -1,0 +1,19 @@
+<main>
+    <section class="cont-control ">
+        <h3>Registro</h3>
+        <input type="text" class="form-control" [(ngModel)]="dataForRegister.username" name="username" id="username" placeholder="Username">
+    
+        <input type="password" class="form-control" [(ngModel)]="dataForRegister.password" name="password" id="password" placeholder="Contraseña">
+        <input type="password" class="form-control" [(ngModel)]="dataForRegister.confirmPassword" name="password" id="password" placeholder="Repita contraseña">
+        <label for="">Tipo de usuario</label>
+        <select class="form-select" placeholder="Tipo usuario" [(ngModel)]="dataForRegister.role_id">
+            <option selected></option>
+            <option value="2">Doctor</option>
+            <option value="3">Cliente</option>
+          </select>
+        <div class="buttons-cont">
+            <button class="btn btn-primary" id="info-auth-sender" (click)="sendDataForRegister()">Enviar</button>
+            <a routerLink="/auth/login">Iniciar Sesion</a>
+         </div>
+    </section>
+</main> 

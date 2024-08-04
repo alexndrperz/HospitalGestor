@@ -1,0 +1,12 @@
+<main>
+    <section class="cont-control ">
+       <h3>Iniciar Sesion</h3>
+       <input type="text" class="form-control" [(ngModel)]="formData.username" name="username" id="username" placeholder="Username">
+       
+       <input type="password" class="form-control" [(ngModel)]="formData.password" name="password" id="password" placeholder="Contraseña">
+       <div class="buttons-cont">
+           <button class="btn btn-primary" id="info-auth-sender" (click)="authUser()">Enviar</button>
+           <a routerLink="/auth/register">Registrarse</a>
+        </div>
+   </section>
+</main>
