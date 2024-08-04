@@ -3,10 +3,47 @@
 <main>
     <section class="header">
         <h1>Especialidades</h1>
-        <button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#especialities-modal">
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#especialities-modal" (click)="popUpOpened()">
             Añadir
         </button>
     </section>
     <hr>
-    <modal-sys [title]="'Añadir Especialidad'" [modalId]="'especialities-modal'"></modal-sys>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let especiality of especailities">
+                <td>{{especiality.id}}</td>
+                <td>{{especiality.name}}</td>
+                <td class="buttons-sect">
+                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#especialities-modal" (click)="popUpOpened(especiality.id)">
+                        Editar
+                    </button>
+                    <button class="btn btn-danger" (click)="deshabilitateEspeciality(especiality.id)">
+                        Eliminar
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+    <modal-sys [title]="'Añadir Especialidad'" [modalId]="'especialities-modal'">
+        <section class="body">
+            <input type="text" class="form-control" [(ngModel)]="formData.name" name="username" id="username"
+                placeholder="Nombre">
+        </section>
+        <section class="buttons">
+            <button class="btn btn-primary"  data-bs-dismiss="modal" aria-label="Close" (click)="selectedId == 0 ? createEspecial() : updateEspeciality()">
+                Enviar
+            </button>
+        </section>
+    </modal-sys>
 </main>

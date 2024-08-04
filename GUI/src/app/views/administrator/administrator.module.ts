@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { RoutesAdmin } from './admin.routing';
 import { MenuAdminComponent } from './components/menu-admin/menu-admin.component';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -16,10 +17,11 @@ import { ModalComponent } from 'src/app/components/modal/modal.component';
     StartViewAdminComponent,
     MenuComponent,
     MenuAdminComponent,
-    ModalComponent
+    ModalComponent,
   ],
   imports: [
     RouterModule.forChild(RoutesAdmin),
+    FormsModule,
     CommonModule
   ]
 })

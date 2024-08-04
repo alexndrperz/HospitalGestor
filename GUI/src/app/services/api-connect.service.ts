@@ -23,7 +23,7 @@ export class ApiConnectService {
     return this._http.put(this.host + path, data)
   }
   delete(path:string) {
-    return this._http.get(this.host + path)
+    return this._http.delete(this.host + path)
   }
 
   closeSesion() {
