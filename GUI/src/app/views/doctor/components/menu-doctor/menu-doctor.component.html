@@ -1,6 +1,6 @@
 <menu-system>
     <li class="nav-item">
-        <a class="nav-link" routerLink="/doctor/schedule-form">Formulario de horario</a>
+        <a class="nav-link" *ngIf="canViewForm" routerLink="/doctor/schedule-form">Formulario de horario</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" routerLink="/doctor/schedule-view" href="#">Horario de trabajo</a>

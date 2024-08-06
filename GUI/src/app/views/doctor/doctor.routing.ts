@@ -6,7 +6,7 @@ import { ReservesViewComponent } from "./reserves-view/reserves-view.component";
 export const DoctorRoutes:Route[] = [
     {
         path:"",
-        redirectTo:"schedule-form",
+        redirectTo:"schedule-view",
         pathMatch:"full"
     },
     {

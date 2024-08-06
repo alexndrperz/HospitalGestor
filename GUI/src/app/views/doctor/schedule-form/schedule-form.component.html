@@ -8,22 +8,24 @@
         <h3>Datos Personales</h3>
         <section class="inputs-cont">
             <label for="form">Nombre</label>
-            <input type="text" id="form" class="form-control">
+            <input type="text" [(ngModel)]="dataUpdateDoctor.fullname" id="form" class="form-control">
         </section>
         <section class="inputs-cont">
             <label for="form">Telefono</label>
-            <input type="text" id="form" class="form-control">
+            <input type="text" id="form" [(ngModel)]="dataUpdateDoctor.telefono" class="form-control">
         </section>
         <section class="inputs-cont">
             <label for="form">Email</label>
-            <input type="text" id="form" class="form-control">
+            <input type="text" id="form" [(ngModel)]="dataUpdateDoctor.email" class="form-control">
         </section>
 
         <section class="inputs-cont">
             <label for="form">Especialidad</label>
-            <select name="" id="" class="form-select"></select>
+            <select name="" id="" class="form-select" [(ngModel)]="dataUpdateDoctor.especiality_id">
+                <option *ngFor="let espec of especialities" [value]="espec.id">{{espec.name}}</option>
+            </select>
         </section>
-        <button class="btn btn-primary" style="margin-top: 10px;">
+        <button class="btn btn-primary" style="margin-top: 10px;" (click)="updateDoctor()">
             Enviar
         </button>
       <hr>  
@@ -45,14 +47,14 @@
         <div class="calc-by" *ngIf="calcBy == 2">
             <label for="calculator">Hora de inicio</label>
             <select class="form-select" [(ngModel)]="initHourInp" id="calculator">
-                <option [value]="sched.id" *ngFor="let sched of schedSystemInfos">{{sched.initHour | date:"hh:mm"}} - {{sched.finalHour | date:"hh:mm"}}</option>
+                <option [value]="sched.id" *ngFor="let sched of schedSystemInfos">{{sched.initHour | date:"HH:mm"}} - {{sched.finalHour | date:"hh:mm"}}</option>
             </select> 
         </div>
 
         <div class="calc-by" *ngIf="calcBy == 2">
             <label for="calculator">Hora final</label>
             <select class="form-select" [(ngModel)]="finalHourInp" id="calculator">
-                <option [value]="sched.id" *ngFor="let sched of schedSystemInfos">{{sched.initHour | date:"hh:mm"}} - {{sched.finalHour | date:"hh:mm"}}</option>
+                <option [value]="sched.id" *ngFor="let sched of schedSystemInfos">{{sched.initHour | date:"HH:mm"}} - {{sched.finalHour | date:"hh:mm"}}</option>
             </select>  
         </div>
 
@@ -104,12 +106,12 @@
         </tbody>
     </table>
     
+    <section class="button-send">
+        <button class="btn btn-primary" (click)="formatSendDataForAPI()">
+            Enviar
+        </button>
+    </section>
 </main>
 
-<section class="button-send">
-    <button class="btn btn-primary" (click)="formatSendDataForAPI()">
-        Enviar
-    </button>
-</section>
 
 

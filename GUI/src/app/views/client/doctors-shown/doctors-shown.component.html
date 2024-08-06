@@ -6,37 +6,16 @@
     </h2>
     <hr>
     <section class="cards-container">
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Martino Paez</h5>
+        <div class="card" *ngFor="let doctor of doctors" style="width: 18rem;" > 
+            <div class="card-body" >
+                <h5 class="card-title">{{doctor.fullName }}</h5>
                 <div class="text-desc">
-                    <p class="card-text"><b>Especialidad:</b> Ortopeda</p>
-                    <p class="card-text"><b>Dias disponibles</b> Lunes, Martes, Miercoles, Jueves, Viernes</p>
-                </div>
-                <button class="btn btn-primary" routerLink="/client/doctors-detail">Ver Horarios</button>
+                    <p class="card-text"><b>Especialidad:</b> {{doctor.especialities.name}}</p>
+                 </div>
+                <button class="btn btn-primary" [routerLink]="['/client/doctors-detail', doctor.id]">Ver Horarios</button>
             </div>
         </div>
 
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Martino Paez</h5>
-                <div class="text-desc">
-                    <p class="card-text"><b>Especialidad:</b> Ortopeda</p>
-                    <p class="card-text"><b>Dias disponibles</b> Lunes, Martes, Miercoles, Jueves, Viernes</p>
-                </div>
-                <button class="btn btn-primary">Ver Horarios</button>
-            </div>
-        </div>
-
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Martino Paez</h5>
-                <div class="text-desc">
-                    <p class="card-text"><b>Especialidad:</b> Ortopeda</p>
-                    <p class="card-text"><b>Dias disponibles</b> Lunes, Martes, Miercoles, Jueves, Viernes</p>
-                </div>
-                <button class="btn btn-primary">Ver Horarios</button>
-            </div>
-        </div>
+      
     </section>
 </main>

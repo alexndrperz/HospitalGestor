@@ -15,10 +15,22 @@ daySelected:number = 1
   peopleToAttend:number = 0
   schedSystemInfos:any[] = []
   dataSourceSched:any[] = []
+
+  especialities:any[] = []
+
+  dataUpdateDoctor:any = {
+    fullname:"",
+    especiality_id:0,
+    telefono:"",
+    email:""
+  }
+
+
   constructor(private _apiConnect:ApiConnectService) {}
 
   ngOnInit() {
     this.getInputData()
+    
   }
 
   getInputData() {
@@ -28,6 +40,28 @@ daySelected:number = 1
         
         this.schedSystemInfos = res
         
+      }
+    })
+
+    this._apiConnect.get("/especialities")
+    .subscribe({
+      next:(res:any) => {
+        console.log(res);
+        this.especialities = res
+        
+      }
+    })
+  }
+
+  updateDoctor() {
+    console.log(this.dataUpdateDoctor);
+    
+    this._apiConnect.put(`/user-dep/doctors/${this._apiConnect.decodeToken().aditionalEnt}`, this.dataUpdateDoctor)
+    .subscribe({
+      next:(res:any) => {
+        console.log(res);
+        
+        this._apiConnect.apiResSnackbar("Actualizado correctamente")
       }
     })
   }

@@ -6,6 +6,6 @@ import { DoctorDetailsComponent } from "./doctor-details/doctor-details.componen
 export const ClientRouting:Route[] = [
     {path:"", redirectTo:"doctors-shown", pathMatch:"full"}, 
     {path:"doctors-shown", component:DoctorsShownComponent},
-    {path:"doctors-detail", component:DoctorDetailsComponent},
+    {path:"doctors-detail/:id", component:DoctorDetailsComponent},
     {path:"personal-reserves", component:PersonalReservesComponent}
 ] 
