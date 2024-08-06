@@ -1,0 +1,115 @@
+<menu-doctor></menu-doctor>
+
+<main>
+    <h2>Complete sus datos</h2>
+    <hr>
+
+    <section class="personal-data">
+        <h3>Datos Personales</h3>
+        <section class="inputs-cont">
+            <label for="form">Nombre</label>
+            <input type="text" id="form" class="form-control">
+        </section>
+        <section class="inputs-cont">
+            <label for="form">Telefono</label>
+            <input type="text" id="form" class="form-control">
+        </section>
+        <section class="inputs-cont">
+            <label for="form">Email</label>
+            <input type="text" id="form" class="form-control">
+        </section>
+
+        <section class="inputs-cont">
+            <label for="form">Especialidad</label>
+            <select name="" id="" class="form-select"></select>
+        </section>
+        <button class="btn btn-primary" style="margin-top: 10px;">
+            Enviar
+        </button>
+      <hr>  
+    </section>
+    <section class="calculator-inputs">
+        <div class="calc-by">
+            <label for="calculator"> Calcular por</label>
+            <select class="form-select" [(ngModel)]="calcBy" id="calculator">
+                <option value="1">Numero de personas a atender</option>
+                <option value="2">Tanda disponible</option>
+            </select> 
+        </div>
+
+        <div class="calc-by" *ngIf="calcBy == 1">
+            <label for="calculator">Numero de pers.</label>
+            <input type="number" [(ngModel)]="peopleToAttend" class="form-control">
+        </div>
+
+        <div class="calc-by" *ngIf="calcBy == 2">
+            <label for="calculator">Hora de inicio</label>
+            <select class="form-select" [(ngModel)]="initHourInp" id="calculator">
+                <option [value]="sched.id" *ngFor="let sched of schedSystemInfos">{{sched.initHour | date:"hh:mm"}} - {{sched.finalHour | date:"hh:mm"}}</option>
+            </select> 
+        </div>
+
+        <div class="calc-by" *ngIf="calcBy == 2">
+            <label for="calculator">Hora final</label>
+            <select class="form-select" [(ngModel)]="finalHourInp" id="calculator">
+                <option [value]="sched.id" *ngFor="let sched of schedSystemInfos">{{sched.initHour | date:"hh:mm"}} - {{sched.finalHour | date:"hh:mm"}}</option>
+            </select>  
+        </div>
+
+        <button class="btn btn-primary" *ngIf="calcBy != 0" (click)="renderInfo()">Renderizar</button>
+
+
+        
+    </section>
+
+    <section class="input-controlers">
+        <div class="day-select">
+            <label for="day" [(ngModel)]="daySelected">Seleccione día</label>
+            <select class="form-select" id="day">
+                <option value="">Lunes</option>
+                <option value="">Martes</option>
+                <option value="">Miercoles</option>
+                <option value="">Jueves</option>
+                <option value="">Viernes</option>
+            </select>
+        </div>
+    </section>
+
+
+    <h3 style="margin-top: 20px;">
+        Horarios
+    </h3>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Hora inicio</th>
+                <th>Hora final</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let sched of dataSourceSched">
+                <td>{{sched.id}}</td>
+                <td>{{sched.initHour | date:"hh:mm"}}</td>
+                <td>{{sched.finalHour | date:"hh:mm"}}</td>
+                <td >
+                    <button class="btn btn-danger" (click)="deleteRenderedCol(sched.id)">
+                        Retirar
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+</main>
+
+<section class="button-send">
+    <button class="btn btn-primary" (click)="formatSendDataForAPI()">
+        Enviar
+    </button>
+</section>
+
+

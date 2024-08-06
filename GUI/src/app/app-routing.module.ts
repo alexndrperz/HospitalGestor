@@ -10,6 +10,14 @@ const routes: Routes = [
    {
     path:"admin",
     loadChildren:() => import("./views/administrator/administrator.module").then(m => m.AdministratorModule)
+   },
+   {
+    path:"doctor",
+    loadChildren:() => import("./views/doctor/doctor.module").then(m => m.DoctorModule)
+   },
+   {
+    path:"client",
+    loadChildren:() => import("./views/client/client.module").then(m => m.ClientModule)
    }
 ];
 

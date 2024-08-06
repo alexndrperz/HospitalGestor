@@ -17,15 +17,63 @@ namespace Datos.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.7");
 
+            modelBuilder.Entity("Datos.Entities.Client", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("dataReady")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("phone")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("user_id")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("user_id");
+
+                    b.ToTable("Client");
+                });
+
+            modelBuilder.Entity("Datos.Entities.Days", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Days");
+                });
+
             modelBuilder.Entity("Datos.Entities.Doctors", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("dataReady")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("email")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("especiality_id")
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("fechaInicio")
                         .HasColumnType("TEXT");
@@ -42,6 +90,8 @@ namespace Datos.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("especiality_id");
 
                     b.HasIndex("user_id");
 
@@ -104,14 +154,41 @@ namespace Datos.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("DoctorsId")
+                    b.Property<int>("day_id")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("doctor_id")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("sched_id")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("id");
 
-                    b.HasIndex("DoctorsId");
+                    b.HasIndex("day_id");
 
-                    b.ToTable("SchedulesRegister");
+                    b.HasIndex("doctor_id");
+
+                    b.HasIndex("sched_id");
+
+                    b.ToTable("SchedulesRegisters");
+                });
+
+            modelBuilder.Entity("Datos.Entities.SchedulesSystem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("finalHour")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("initHour")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SchedulesSystems");
                 });
 
             modelBuilder.Entity("Datos.Entities.Users", b =>
@@ -144,7 +221,7 @@ namespace Datos.Migrations
                         new
                         {
                             id = 1,
-                            creadoEn = new DateTime(2024, 8, 3, 18, 3, 14, 827, DateTimeKind.Local).AddTicks(1691),
+                            creadoEn = new DateTime(2024, 8, 6, 2, 14, 29, 42, DateTimeKind.Local).AddTicks(7303),
                             password = "12345",
                             role_id = 1,
                             username = "admin_test"
@@ -152,7 +229,7 @@ namespace Datos.Migrations
                         new
                         {
                             id = 2,
-                            creadoEn = new DateTime(2024, 8, 3, 18, 3, 14, 827, DateTimeKind.Local).AddTicks(1703),
+                            creadoEn = new DateTime(2024, 8, 6, 2, 14, 29, 42, DateTimeKind.Local).AddTicks(7318),
                             password = "12345",
                             role_id = 2,
                             username = "doctor_test"
@@ -160,14 +237,14 @@ namespace Datos.Migrations
                         new
                         {
                             id = 3,
-                            creadoEn = new DateTime(2024, 8, 3, 18, 3, 14, 827, DateTimeKind.Local).AddTicks(1705),
+                            creadoEn = new DateTime(2024, 8, 6, 2, 14, 29, 42, DateTimeKind.Local).AddTicks(7320),
                             password = "12345",
                             role_id = 3,
                             username = "client_test"
                         });
                 });
 
-            modelBuilder.Entity("Datos.Entities.Doctors", b =>
+            modelBuilder.Entity("Datos.Entities.Client", b =>
                 {
                     b.HasOne("Datos.Entities.Users", "user")
                         .WithMany()
@@ -178,11 +255,50 @@ namespace Datos.Migrations
                     b.Navigation("user");
                 });
 
+            modelBuilder.Entity("Datos.Entities.Doctors", b =>
+                {
+                    b.HasOne("Datos.Entities.Especialities", "Especialities")
+                        .WithMany()
+                        .HasForeignKey("especiality_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Datos.Entities.Users", "user")
+                        .WithMany()
+                        .HasForeignKey("user_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Especialities");
+
+                    b.Navigation("user");
+                });
+
             modelBuilder.Entity("Datos.Entities.SchedulesRegister", b =>
                 {
-                    b.HasOne("Datos.Entities.Doctors", null)
+                    b.HasOne("Datos.Entities.Days", "day")
+                        .WithMany()
+                        .HasForeignKey("day_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Datos.Entities.Doctors", "doctor")
                         .WithMany("schedules")
-                        .HasForeignKey("DoctorsId");
+                        .HasForeignKey("doctor_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Datos.Entities.SchedulesSystem", "sched")
+                        .WithMany()
+                        .HasForeignKey("sched_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("day");
+
+                    b.Navigation("doctor");
+
+                    b.Navigation("sched");
                 });
 
             modelBuilder.Entity("Datos.Entities.Users", b =>

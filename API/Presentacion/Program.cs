@@ -17,6 +17,8 @@ internal class Program
         // Repository
         builder.Services.AddScoped<IAuthService, AuthService>();
         builder.Services.AddScoped<IEspecialitiesService, EspecialitiesService>();
+        builder.Services.AddScoped<IScheduleService, ScheduleService>();
+        builder.Services.AddScoped<IDoctorClientService, DoctorClientService>();
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();

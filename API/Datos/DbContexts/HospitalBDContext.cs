@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,6 +27,10 @@ namespace Datos.DbContexts
         public DbSet<Roles> Roles { get; set; }
         public DbSet<Doctors> Doctors { get; set; }
         public DbSet<Especialities> Especialities{ get; set; }
+        public DbSet<SchedulesSystem> SchedulesSystems{ get; set; }
+        public DbSet<SchedulesRegister> SchedulesRegisters{ get; set; }
+        public DbSet<Days> Days{ get; set; }
+        public DbSet<Client> Client { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -42,7 +47,7 @@ namespace Datos.DbContexts
                     new Users() { id = 3, username = "client_test", password = "12345", role_id = 3 }
                 );
 
-
         }
+
     }
 }

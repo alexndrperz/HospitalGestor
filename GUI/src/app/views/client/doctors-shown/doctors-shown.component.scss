@@ -1,0 +1,16 @@
+main {
+    padding: 20px;
+}
+
+.cards-container {
+    .text-desc{
+        margin: 20px 0px;
+        p {
+            margin: 0px;
+        }
+    }
+
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}

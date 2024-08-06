@@ -1,0 +1,46 @@
+<menu-doctor></menu-doctor>
+
+
+<main>
+    <h2>
+        Horario de trabajo
+    </h2>
+    <hr>
+    <section class="input-controlers">
+        <div class="day-select">
+            <label for="day">Seleccione día</label>
+            <select class="form-select" id="day" [(ngModel)]="daySelected" (ngModelChange)="selectedDay()">
+                <option value="1">Lunes</option>
+                <option value="2">Martes</option>
+                <option value="3">Miercoles</option>
+                <option value="4">Jueves</option>
+                <option value="5">Viernes</option>
+            </select>
+        </div>
+    </section>
+
+
+    <h3 style="margin-top: 20px;">
+        Horarios
+    </h3>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Hora inicio</th>
+                <th>Hora final</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let schedInd of scheduleView">
+                <td>{{schedInd.id}}</td>
+                <td>{{schedInd.sched.initHour | date:"HH:mm"}}</td>
+                <td>{{schedInd.sched.finalHour | date:"HH:mm"}}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+</main>
+

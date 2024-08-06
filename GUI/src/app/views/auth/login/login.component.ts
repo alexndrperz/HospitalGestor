@@ -25,13 +25,12 @@ export class LoginComponent {
   authUser() {
     this._apiConnect.post("/auth/login", this.formData)
     .subscribe((res:any) => {
-      sessionStorage.setItem("user", res)
+      sessionStorage.setItem("user",JSON.stringify(res))
       const role_id = res.role_id
       switch (role_id) {
-        case 1:
-          this._router.navigate(["admin"])
-          
-          break;
+        case 1:this._router.navigate(["admin"]);break;
+        case 2:this._router.navigate(["doctor"]);break;
+        case 3:this._router.navigate(["client"]);break;
       
         default:
           break;
